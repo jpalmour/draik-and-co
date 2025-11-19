@@ -1,0 +1,54 @@
+name: 'Hugo Build'
+description: 'Builds a Hugo site'
+
+inputs:
+  hugo-version:
+    description: 'Hugo version to use'
+    required: false
+    default: '0.144.2'
+  extended:
+    description: 'Whether to use Hugo extended'
+    required: false
+    default: 'true'
+  environment:
+    description: 'Environment to build for'
+    required: false
+    default: 'production'
+  baseURL:
+    description: 'Override the baseURL in config.toml'
+    required: false
+    default: ''
+  version-id:
+    description: 'Version identifier to include in build (tag or commit hash)'
+    required: false
+    default: ''
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: ${{ inputs.hugo-version }}
+        extended: ${{ inputs.extended }}
+
+    - name: Build site
+      shell: bash
+      run: |
+        # Define build parameters
+        BUILD_PARAMS="--gc --minify --environment ${{ inputs.environment }}"
+        
+        # Add baseURL if provided
+        if [ -n "${{ inputs.baseURL }}" ]; then
+          BUILD_PARAMS="$BUILD_PARAMS --baseURL ${{ inputs.baseURL }}"
+        fi
+        
+        # Add version identifier as an environment variable
+        # Hugo makes env vars with HUGO_PARAMS_ prefix available as site params
+        if [ -n "${{ inputs.version-id }}" ]; then
+          export HUGO_PARAMS_VERSION="${{ inputs.version-id }}"
+          echo "Setting version parameter to: $HUGO_PARAMS_VERSION"
+        fi
+        
+        # Run Hugo with the assembled parameters
+        eval "hugo $BUILD_PARAMS"
