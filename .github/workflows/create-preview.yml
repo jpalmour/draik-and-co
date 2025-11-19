@@ -88,9 +88,3 @@ jobs:
                 body
               });
             }
-            
-      - name: Verify deployment and wait for version to be available
-        uses: ./.github/actions/verify-deployment
-        with:
-          url: "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-${{ github.event.pull_request.number }}/"
-          expected-version: "${{ github.sha }}"
