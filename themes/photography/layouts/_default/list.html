@@ -1,0 +1,15 @@
+{{ define "main" }}
+<section class="content-section">
+    <h1 class="section-title">{{ .Title }}</h1>
+    <div class="grid grid-3">
+        {{ range .Pages }}
+        <div class="card">
+            <div class="card-content">
+                <h3 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                <p class="card-text">{{ .Summary }}</p>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</section>
+{{ end }}

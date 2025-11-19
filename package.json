@@ -1,0 +1,25 @@
+{
+  "name": "draik-and-co",
+  "version": "1.0.0",
+  "description": "A Hugo-based photography portfolio website. This is a simplified, customizable template ready for client work.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky",
+    "audit": "start-server-and-test 'hugo serve' http://localhost:1313 'lighthouse http://localhost:1313 --output html --output json --output-path ./lighthouse-report --chrome-flags=\"--headless\"'"
+  },
+  "lint-staged": {
+    "**/*.{js,css,md,html,json}": "prettier --write"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lighthouse": "^12.8.2",
+    "lint-staged": "^16.2.6",
+    "prettier": "^3.6.2",
+    "start-server-and-test": "^2.1.2"
+  }
+}

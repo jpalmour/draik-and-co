@@ -1,0 +1,29 @@
+# Hugo
+/public/
+/resources/_gen/
+/assets/jsconfig.json
+hugo_stats.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.log
+.hugo_build.lock
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Lighthouse
+lighthouse-report.*
+

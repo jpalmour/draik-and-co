@@ -1,0 +1,27 @@
+{{ $src := .src }} {{ $alt := .alt }} {{ $class := .class | default "" }} {{ $loading := .loading |
+default "lazy" }} {{ $sizes := .sizes | default "100vw" }} {{/* Attempt to find the image in assets
+*/}} {{ $image := resources.Get $src }} {{ if $image }} {{/* Generate WebP variants */}} {{ $tiny :=
+$image.Resize "480x webp" }} {{ $small := $image.Resize "800x webp" }} {{ $medium := $image.Resize
+"1200x webp" }} {{ $large := $image.Resize "1600x webp" }} {{ $xlarge := $image.Resize "2000x webp"
+}} {{/* Fallback (original format but resized if too huge, or just original) */}} {{/* We'll use the
+medium WebP as the src for modern browsers, or original if we want strict fallback. But standard
+practice is src can be one of the candidates. */}}
+
+<img
+  src="{{ $medium.RelPermalink }}"
+  srcset="
+      {{ $tiny.RelPermalink }} 480w,
+      {{ $small.RelPermalink }} 800w,
+      {{ $medium.RelPermalink }} 1200w,
+      {{ $large.RelPermalink }} 1600w,
+      {{ $xlarge.RelPermalink }} 2000w"
+  sizes="{{ $sizes }}"
+  alt="{{ $alt }}"
+  class="{{ $class }}"
+  loading="{{ $loading }}"
+  width="{{ $image.Width }}"
+  height="{{ $image.Height }}"
+/>
+{{ else }} {{/* Fallback if image not found (shouldn't happen if paths are correct) */}}
+<img src="{{ $src | relURL }}" alt="{{ $alt }}" class="{{ $class }}" />
+{{ warnf "Image not found: %s" $src }} {{ end }}

@@ -1,0 +1,35 @@
+baseURL = 'https://example.com/'
+languageCode = 'en-us'
+title = 'Draik & Co. Photography'
+theme = 'photography'
+
+[params]
+  description = "Professional Photography Services - Capturing Life's Beautiful Moments"
+  author = "Draik & Co."
+  tagline = "Timeless Photography"
+
+[menu]
+  [[menu.main]]
+    name = "HOME"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "ABOUT"
+    url = "#introduction"
+    weight = 2
+  [[menu.main]]
+    name = "SERVICES"
+    url = "#quick-navigation"
+    weight = 3
+  [[menu.main]]
+    name = "BLOG"
+    url = "#blog"
+    weight = 4
+  [[menu.main]]
+    name = "CONTACT"
+    url = "#contact"
+    weight = 5
+  [[menu.main]]
+    name = "FAQ"
+    url = "#faq"
+    weight = 6
